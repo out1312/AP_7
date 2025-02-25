@@ -7,13 +7,13 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=Cygwin-Windows
-CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
+CND_PLATFORM_Debug=GNU_1-Linux
+CND_ARTIFACT_DIR_Debug=dist/Debug/GNU_1-Linux
 CND_ARTIFACT_NAME_Debug=practica1_ap7
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/practica1_ap7
-CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU_1-Linux/practica1_ap7
+CND_PACKAGE_DIR_Debug=dist/Debug/GNU_1-Linux/package
 CND_PACKAGE_NAME_Debug=practica1ap7.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/practica1ap7.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU_1-Linux/package/practica1ap7.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows

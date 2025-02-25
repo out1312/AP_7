@@ -14,15 +14,15 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=g++
-CXX=g++
+CC=gcc.exe
+CCC=g++.exe
+CXX=g++.exe
 FC=gfortran
-AS=as
+AS=as.exe
 
 # Macros
-CND_PLATFORM=Cygwin-Windows
-CND_DLIB_EXT=dll
+CND_PLATFORM=GNU_1-Linux
+CND_DLIB_EXT=so
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -56,11 +56,11 @@ LDLIBSOPTIONS=-L../../../../../opencv3.0.0/x64 ../../../../../opencv3.0.0/x64/op
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7.exe: ../../../../../opencv3.0.0/x64/opencv_world300.dll
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7: ../../../../../opencv3.0.0/x64/opencv_world300.dll
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
@@ -76,7 +76,7 @@ ${OBJECTDIR}/main.o: main.c
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
 	${RM} -r ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/opencv_world300.dll
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7.exe
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/practica1_ap7
 
 # Subprojects
 .clean-subprojects:

@@ -45,7 +45,42 @@ int compararBloques(int fila1, int col1, IplImage* img1, int fila2, int col2, Ip
             for (pixel = 0; pixel < 3; pixel++) {
                 valorComp += abs(*pImag2++ - *pImag1++);
             }
-            col2++;
+        }
+        fila2++;
+    }
+    return valorComp;
+}
+
+void copiarBloqueSSE(int filaO, int colO, IplImage* imgO, int filaD, int colD, IplImage* imgD, int alto, int ancho) {
+    int colOCP;
+    for (filaO; filaO < filaO + 16; filaO++) {
+        __m128i *pImag1 = (__m128i *) ((imgO->imageData + filaO * imgO->widthStep) + colO * 3);
+        __m128i *pImag2 = (__m128i *) ((imgD->imageData + filaD * imgD->widthStep) + colD * 3);
+        for (colOCP = colO; colOCP < colO + 48; colOCP+=16) {
+            printf("Fila: %d. ", filaO);
+            printf("Columna: %d. ", colOCP);
+            printf("Fila D: %d\n", filaD);
+            *pImag2++ = *pImag1++;
+        }
+        filaD++;
+    }
+}
+
+// Nesta función as columnas non son píxeles, senón compoñentes de cor.
+int compararBloquesSSE(int fila1, int col1, IplImage* img1, int fila2, int col2, IplImage* img2, int alto, int ancho) {
+    int valorComp = 0;
+    __m128i valorComp128;
+    int limFila = fila1 + 16;
+    int limCol = col1 + 48;
+    int col1CP;
+    for (fila1; fila1 < limFila; fila1++) {
+        __m128i *pImag1 = (__m128i *) ((img1->imageData + fila1 * img1->widthStep) + col1 * 3);
+        __m128i *pImag2 = (__m128i *) ((img2->imageData + fila2 * img2->widthStep) + col2 * 3);
+        for (col1CP = col1; col1CP < limCol; col1CP += 16) {
+            valorComp128 = _mm_sad_epu8(*pImag1, *pImag2);
+            valorComp += abs(_mm_cvtsi128_si32(valorComp128));
+            pImag1++;
+            pImag2++;
         }
         fila2++;
     }
@@ -77,7 +112,7 @@ int main(int argc, char** argv) {
             int minBloqueFil, minBloqueCol;
             for(filaCMP=0; filaCMP<Img2->height; filaCMP+=tamBloque){
                 for(columnaCMP=0; columnaCMP<Img2->width; columnaCMP+=tamBloque){
-                    int resComp = compararBloques(filaCMP, columnaCMP, Img1, fila, columna, Img2, Img1->height, Img1->width);
+                    int resComp = compararBloquesSSE(filaCMP, columnaCMP, Img1, fila, columna, Img2, Img1->height, Img1->width);
                     //printf("%d\n", resComp);
                     if(resComp<minDiff){
                         minDiff = resComp;
@@ -86,8 +121,8 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-            copiarBloque(minBloqueFil, minBloqueCol, Img1, fila, columna, Img2, Img2->height, Img2->width);
-            cvWaitKey(0);
+            copiarBloqueSSE(minBloqueFil, minBloqueCol, Img1, fila, columna, Img2, Img2->height, Img2->width);
+            cvWaitKey(1);
             cvShowImage(argv[2], Img2);
         }
     }

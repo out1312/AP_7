@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
                 }
             }
             copiarBloque(minBloqueFil, minBloqueCol, Img1, fila, columna, Img2, Img2->height, Img2->width);
-            cvWaitKey(0);
+            cvWaitKey(1);
             cvShowImage(argv[2], Img2);
         }
     }
